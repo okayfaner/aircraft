@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>AirCraft</title>
+  <meta name="description" content="AirCraft game">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="css/game.css">
+
+  <!--
+    Loading code to resize gameArea according to some chosen width-to-height ratio.
+    In TicTacToe, the ratio is 1 (i.e., width/height = 1)
+  -->
+  <script src="lib/angular.js"></script>
+  <script src="lib/turnBasedServices.4.js"></script>
+  <script>
+    angular.module('myApp', ['gameServices']).run(function () { resizeGameAreaService.setWidthToHeight(1); });
+  </script>
+</head>
+<body>
+<div id="gameArea">
+  <!--top, left is the location for the top-left point. width height is the scale of current object according to the upper object-->
+   <!--First row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:0%; left:0; width:100%; height:16.7%;">
+
+    <div style="position:absolute; top:0; left:0%; width:16.7%; height:100%;"
+         class="r">
+        <div class="a">
+            <img src="pics/air-show-2059173_1920.jpg" height="100%" width="100%"/>
+        </div>
+    </div>
+
+    <div style="position:absolute; top:0; left:16.7%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/youchi2.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+         class="r blank">
+    </div>
+
+    <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+         class="r red grey ">
+    </div>
+
+    <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+         class="r blank red">
+    </div>
+
+    <div style="position:absolute; top:0%; left:83.3%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+  </div>
+
+   <!--Second row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:16.7%; left:0%; width:100%; height:16.7%;">
+
+    <div style="position:absolute; top:0%; left:0%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+    <div style="position:absolute; top:0%; left:16.7%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/youchi1.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+    <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/weiyou.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+    <div style="position:absolute; top:0; left:83.3%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+  </div>
+
+   <!--Third row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:33.3%; left:0%; width:100%; height:16.7%;">
+
+    <div style="position:absolute; top:0%; left:0%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/tou.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0%; left:16.7%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/shen1.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/shen2.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+         class="r">
+        <img src="pics/weizhong.png" height="100%" width="100%"/>
+    </div>
+
+    <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+    <div style="position:absolute; top:0; left:83.3%; width:16.7%; height:100%;"
+         class="r">
+    </div>
+
+  </div>
+
+   <!--Forth row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:50%; left:0%; width:100%; height:16.7%;">
+
+      <div style="position:absolute; top:0%; left:0%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0%; left:16.7%; width:16.7%; height:100%;"
+           class="r">
+          <img src="pics/zuochi1.png" height="100%" width="100%"/>
+      </div>
+
+      <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+           class="r">
+          <img src="pics/weizuo.png" height="100%" width="100%"/>
+      </div>
+
+      <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:83.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+  </div>
+
+   <!--Fifth row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:66.7%; left:0; width:100%; height:16.7%;">
+
+      <div style="position:absolute; top:0%; left:0%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0%; left:16.7%; width:16.7%; height:100%;"
+           class="r">
+          <img src="pics/zuochi2.png" height="100%" width="100%"/>
+      </div>
+
+      <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:83.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+  </div>
+
+   <!--Sixth row: ['', '', '', '', '', '']-->
+  <div style="position:absolute; top:83.3%; left:0; width:100%; height:16.7%;">
+
+      <div style="position:absolute; top:0%; left:0%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0%; left:16.7%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:33.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:50%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:66.7%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+      <div style="position:absolute; top:0; left:83.3%; width:16.7%; height:100%;"
+           class="r">
+      </div>
+
+  </div>
+</div>
+
+</body>
+</html>

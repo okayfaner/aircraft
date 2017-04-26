@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- build:[manifest] index.min.appcache -->
+<html lang="en" ng-app="myApp" ng-strict-di>
+<!-- /build -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>SkyCraft</title>
+    <meta name="description" content="SkyCraft game">
+    <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,"><!-- Suppress browser request for favicon.ico -->
+
+    <!-- To ensure CSS files are downloaded in parallel, always include external CSS before external JavaScript. -->
+    <!-- build:[href] css/everything.min.css -->
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+    <!-- /build -->
+
+    <!-- build:js js/everything.min.js -->
+    <script src="lib/angular.js"></script>
+    <script src="lib/turnBasedServices.4.js"></script>
+    <script src="ts_output_readonly_do_NOT_change_manually/src/gameLogic.js"></script>
+    <script src="ts_output_readonly_do_NOT_change_manually/src/game.js"></script>
+    <script src="ts_output_readonly_do_NOT_change_manually/src/aiService.js"></script>
+    <!-- /build -->
+</head>
+
+<body ng-cloak>
+<div style="background-color:gray; width:2px; position: absolute; left:49.5% ;height:100%;"></div>
+<div id="gameArea" style="position : absolute; top:5%;left: 2%; right: 2%;">
+    <div id="moveArea" style="position:absolute; top:8%; left:1%; width:45%; height:90%;">
+        <div ng-repeat="row in [0, 1, 2, 3, 4, 5]"
+             style="position:absolute; top:{{row * 16.6}}%; left:0; width:100%; height:16.6%;">
+            <div ng-repeat="col in [0, 1, 2, 3, 4 ,5]"
+                 style="position:absolute; top:0; left:{{col * 16.6}}%; width:16.6%; height:100%;"
+                 ng-class="{blank:1}"
+                 ng-click="game.cellClicked(row, col)"
+                 id="{{'e2e_test_div_' + row + 'x' + col}}">
+                <div style="width:100%; height: 100%"
+                     ng-class="{slowlyAppear: game.shouldSlowlyAppear(row, col)}"
+                     ng-style="game.getCellStyle(row, col)"
+                     ng-if="game.shouldShowImage(row, col)">
+                    <svg ng-if="game.isPieceHit(row, col)"
+                         id="{{'e2e_test_pieceO_' + row + 'x' + col}}"
+                         ng-class="{red:1}"
+                         width="100%" height="100%">
+                    </svg>
+                    <svg ng-if="game.isPieceBlank(row, col)"
+                         id="{{'e2e_test_pieceX_' + row + 'x' + col}}"
+                         ng-class="{grey:1}"
+                         width="100%" height="100%">
+
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  style="position : absolute; top:0%; right: 5%; height:3%;">
+        <!--{{ greeting }}-->
+        HP: <span >{{game.showHp(game.currentUpdateUI.yourPlayerIndex)}}</span>
+    </div>
+
+    <div id="showArea" style="position: absolute; top:8%; right:2%; width:45%; height:90%;">
+        <div ng-repeat="row in [0, 1, 2, 3, 4, 5]"
+             style="position:absolute; top:{{row * 16.6}}%; left:0; width:100%; height:16.6%;">
+            <div ng-repeat="col in [0, 1, 2, 3, 4 ,5]"
+                 style="position:absolute; top:0; left:{{col * 16.6}}%; width:16.6%; height:100%;"
+                 ng-class="{r: col < 6, b: row < 6}"
+                 id="{{'e2e_test1_div_' + row + 'x' + col}}">
+                <div style="width:100%; height: 100%"
+                     ng-class="{slowlyAppear: game.shouldSlowlyAppear(row, col)}"
+                     ng-style="game.getCellStyle(row, col)">
+                    <svg ng-if="game.showCraft(row, col)"
+                         id="{{'e2e_test_pieceC_1' + row + 'x' + col}}"
+                         ng-class="{blue:1}"
+                         width="100%" height="100%">
+                    </svg>
+                    <svg ng-if="game.showDamagedCraft(row, col)"
+                        id="{{'e2e_test_pieceD_1' + row + 'x' + col}}"
+                        ng-class="{blue:1}"
+                        width="100%" height="100%">
+                        <line x1="2%" y1="2%"
+                                x2="98%" y2="98%"
+                                stroke="red"
+                                stroke-width="5%"/>
+                        <line x1="2%" y1="98%"
+                                x2="98%" y2="2%"
+                                stroke="red"
+                                stroke-width="5%"/>
+                    </svg>
+                    <svg ng-if="game.showDamagedBlank(row, col)"
+                        id="{{'e2e_test_pieceD_1' + row + 'x' + col}}"
+                        ng-class="{grey:1}"
+                        width="100%" height="100%">
+                        <line x1="2%" y1="2%"
+                                x2="98%" y2="98%"
+                                stroke="red"
+                                stroke-width="5%"/>
+                        <line x1="2%" y1="98%"
+                                x2="98%" y2="2%"
+                                stroke="red"
+                                stroke-width="5%"/>
+                    </svg>
+                    <svg ng-if="game.showBlank(row, col)"
+                         id="{{'e2e_test_pieceB_1' + row + 'x' + col}}"
+                         ng-class="{grey:1}"
+                         width="100%" height="100%">
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
