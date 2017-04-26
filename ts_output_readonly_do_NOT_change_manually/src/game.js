@@ -67,6 +67,7 @@ var game;
                 state: game.state,
                 endMatchScores: null,
             };
+            //makeMove(move);
         }
         // We calculate the AI move only after the animation finishes,
         // because if we call aiService now
